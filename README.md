@@ -331,7 +331,7 @@ class Rental...
 Mais duas variáveis locais (temp) vão ser extraídas para funções (queries). São elas:
 
 * `totalAmount` vai ser substituída por `getTotalCharge()`
-* `frequentRenterPoints` vai ser substituída por ``.
+* `frequentRenterPoints` vai ser substituída por `getTotalFrequentRenterPoints`.
 
 Veja como deve ficar o código após esses dois refactorings:
 
@@ -375,6 +375,12 @@ public String statement() {
         return result;
      }
 ```
+
+Alguns pontos que pode estar pensando sobre esse refactoring:
+
+* Ele aumentou o tamanho do código: porém, também não foi tanto assim ...
+* Ele fez com o que o loop de `rentals` seja percorrido três vezes; na primeira versão do código, esse loop era executado uma única vez. Isso gera problema de performance? Talvez sim; mas, talvez na maioria dos casos, não faça diferença (pois um cliente não tem tantos filmes alugados)
+
 
 **Commit & Push**
 
