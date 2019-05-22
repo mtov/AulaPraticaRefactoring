@@ -660,7 +660,9 @@ class NewReleasePrice
    }
 ``` 
 
-Pronto, com isso terminanos: **Commit & Push**
+Pronto, com isso terminamos: **Commit & Push**
+
+# Comentário Final
 
 Para terminar mesmo, leia e reflita com calma sobre os comentários finais do Fowler (ele argumenta sobre as vantagens desse último refactoring):
 
