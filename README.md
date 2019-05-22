@@ -13,7 +13,7 @@ Instruções:
 * Após cada refactoring, dê um **COMMIT & PUSH**. Esses commits serão usados na correção, para garantir que realizou todos os refactorings solicitados.
 
 
-# Descrição e Versão Inicial
+# Versão Inicial
 
 As classes que vamos usar fazem parte de um sistema de video-locadora, para aluguel de vídeos.
 
@@ -124,6 +124,7 @@ class Customer {
      return result;
 }
 ```
+**COMMIT & PUSH**
 
 # Refactorig 1: Extract Method
 
@@ -410,7 +411,95 @@ public String htmlStatement() {
 }
 ```
 
-Vantagem: conseguimos reusar todos os métodos criados anteriormente, incluindo:  `getCharge()`, `getTotalCharge()` e `getTotalFrequentRenterPoints`. Com isso, a criação desse novo método foi bem rápido e não causou duplicação de código (ou uma duplicação pequena, assumindo que existem alguma lógica repetida, com o método `statement`).
+Vantagem: conseguimos reusar todos os métodos criados anteriormente, incluindo:  `getCharge()`, `getTotalCharge()` e `getTotalFrequentRenterPoints`. Por isso, a criação do novo método foi bem rápida e não causou duplicação de código (ou uma duplicação pequena, assumindo que ainda existe alguma lógica repetida, com o método `statement`).
 
 
 **Commit & Push**
+
+# Refactoring 7: Replace Conditional with Polymorphism
+
+Primeiro, não faz sentido ter um switch que depende de um atributo (`_priceCode`) de uma outra classe (`Movie)`, como em:
+
+```java
+class Rental...
+   double getCharge() {
+      double result = 0;
+      switch (getMovie().getPriceCode()) {
+         case Movie.REGULAR:
+            result += 2;
+             if (getDaysRented() > 2)
+                result += (getDaysRented() - 2) * 1.5;
+             break;
+         case Movie.NEW_RELEASE:
+            result += getDaysRented() * 3;
+            break;
+         case Movie.CHILDRENS:
+            result += 1.5;
+            if (getDaysRented() > 3)
+               result += (getDaysRented() - 3) * 1.5;
+            break;
+       }
+       return result;
+  }
+```
+
+Logo, vamos extrair esse switch para um método e depois movê-lo para a class `Movie`:
+
+```java
+class Movie...
+   double getCharge(int daysRented) {
+      double result = 0;
+      switch (getPriceCode()) {
+         case Movie.REGULAR:
+            result += 2;
+            if (daysRented > 2)
+               result += (daysRented - 2) * 1.5;
+            break;
+         case Movie.NEW_RELEASE:
+            result += daysRented * 3;
+            break;
+         case Movie.CHILDRENS:
+            result += 1.5;
+            if (daysRented > 3)
+               result += (daysRented - 3) * 1.5;
+            break;
+      }
+      return result;
+   }
+```
+
+O método antigo agora apenas inclui uma chamada para o método novo:
+
+```java
+class Rental...
+   double getCharge() {
+      return _movie.getCharge(_daysRented);
+   }
+```
+
+Vamos agora também mover `getFrequentRenterPoints` para `Movie`; ou seja, é melhor que métodos que usam informações sobre tipos de filme estejam todos na classe `Movie`:
+
+```java
+class Rental...
+   int getFrequentRenterPoints() {
+       return _movie.getFrequentRenterPoints(_daysRented);
+   }
+
+
+class Movie...
+   int getFrequentRenterPoints(int daysRented) {
+       if ((getPriceCode() == Movie.NEW_RELEASE) && daysRented > 1)
+          return 2;
+       else
+          return 1;
+}
+```
+
+Por fim, herança, como no diagrama abaixo:
+
+
+(https://github.com/mtov/AulaPraticaRefactoring/classdiagram.jpg)
+
+
+
+
