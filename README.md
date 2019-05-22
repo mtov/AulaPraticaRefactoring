@@ -133,7 +133,7 @@ Implemente um teste para o método `statement`. Crie alguns objetos do tipo `Mov
 
 Após cada refactoring deste roteiro (e antes de dar um push/commit), se certifique de que o teste criado continua passando.
 
-**Commit & Push**
+**COMMIT & PUSH**
 
 # Refactorig 1: Extract Method
 
@@ -172,7 +172,7 @@ public String statement() {
 }
 ```
 
-**Commit & Push**
+**COMMIT & PUSH**
 
 # Refactoring 2: Rename
 
@@ -200,7 +200,7 @@ private double amountFor(Rental aRental) {
 }
 ```
 
-**Commit & Push**
+**COMMIT & PUSH**
 
 # Refactoring 3: Move Method
 
@@ -291,7 +291,7 @@ Resumindo o que foi feito acima: `thisAmount` sumiu e, nos dois pontos em que er
 Motivação para esse refactoring (chamado Replace Temp with Query): ficar livre de variáveis temporárias, que tendem a dificultar o entendimento do código; pois você tem que lembrar o que elas armazenam. Claro, pode-se alegar que isso causa um problema de performance. Porém, esse possível problema pode ser inclusive resolvido pelo compilador (isto é, pelas estratégias de otimização de código implementadas pelo compilador de Java).
 
 
-**Commit & Push**
+**COMMIT & PUSH**
 
 # Refactoring 5: Extract Method
 
@@ -334,7 +334,7 @@ class Rental...
    }
 ```
 
-**Commit & Push**
+**COMMIT & PUSH**
 
 # Refactoring 6: Replace Temp With Query
 
@@ -392,7 +392,7 @@ Dois comentários breve, sobre alguns pontos que você já pode estar pensando s
 * Eles fizeram com o que o loop de `rentals` seja percorrido três vezes; na primeira versão do código, esse loop era executado uma única vez. Isso vai gerar problemas de performance? Talvez sim; mas, provavelmente na maioria dos casos, não vai fazer diferença, pois um cliente não tem tantos filmes alugados.
 
 
-**Commit & Push**
+**COMMIT & PUSH**
 
 # Nova feature: Statement em HTML
 
@@ -423,7 +423,7 @@ public String htmlStatement() {
 Vantagem: conseguimos reusar todos os métodos criados anteriormente, incluindo:  `getCharge()`, `getTotalCharge()` e `getTotalFrequentRenterPoints`. Por isso, a criação do novo método foi bem rápida e não causou duplicação de código (ou uma duplicação pequena, assumindo que ainda existe alguma lógica repetida, com o método `statement`).
 
 
-**Commit & Push**
+**COMMIT & PUSH**
 
 # Refactoring 7: Replace Conditional with Polymorphism
 
@@ -667,7 +667,7 @@ class NewReleasePrice
    }
 ``` 
 
-Pronto, com isso terminamos: **Commit & Push**
+Pronto, com isso terminamos: **COMMIT & PUSH**
 
 # Comentário Final
 
