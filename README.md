@@ -326,3 +326,55 @@ class Rental...
 
 **Commit & Push**
 
+# Refactoring 6: Replace Temp With Query
+
+Mais duas variáveis locais (temp) vão ser extraídas para funções (queries). São elas:
+
+* `totalAmount` vai ser substituída por `getTotalCharge()`
+* `frequentRenterPoints` vai ser substituída por ``.
+
+Veja como deve ficar o código após esses dois refactorings:
+
+
+```java
+public String statement() {
+   Enumeration rentals = _rentals.elements();
+   String result = "Rental Record for " + getName() + "\n";
+   while (rentals.hasMoreElements()) {
+      Rental each = (Rental) rentals.nextElement();
+
+      // show figures for this rental
+      result += "\t" + each.getMovie().getTitle()+ "\t" +
+                String.valueOf(each.getCharge()) + "\n";
+   }
+
+   // add footer lines
+   result +=  "Amount owed is " + String.valueOf(getTotalCharge()) + "\n";
+   result += "You earned " + String.valueOf(getTotalFrequentRenterPoints()) +
+                   " frequent renter points";
+   return result;
+}
+    
+    private double getTotalCharge() {
+         double result = 0;
+         Enumeration rentals = _rentals.elements();
+         while (rentals.hasMoreElements()) {
+             Rental each = (Rental) rentals.nextElement();
+             result += each.getCharge();
+         }
+         return result;
+     }
+
+     private int getTotalFrequentRenterPoints(){
+          int result = 0;
+          Enumeration rentals = _rentals.elements();
+          while (rentals.hasMoreElements()) {
+              Rental each = (Rental) rentals.nextElement();
+              result += each.getFrequentRenterPoints();
+          }
+          return result;
+      }
+```
+
+**Commit & Push**
+
