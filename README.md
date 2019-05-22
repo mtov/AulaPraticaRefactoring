@@ -196,11 +196,11 @@ private double amountFor(Rental aRental) {
 
 Mover o método `amountFor(Rental)` da classe `Customer` para a classe `Rental`, já que esse método não usa informações da primeira, mas sim da segunda classe. 
 
-Inicialmente, mova esse método para `Rental`, mas com o nome `getCharge()`; a versão antiga vai ser alterada para apenas delegar a chamada, para o método movido:
+Inicialmente, mova esse método para `Rental`, mas com o nome `getCharge()`; a versão antiga vai ser alterada para apenas delegar a chamada, para o método movido.  A ideia é que refactorings devem ser feitos em pequenos passos, para garantir que nada está sendo quebrado.
 
-```
+```java
 class Rental...
-   double getCharge() {
+   double getCharge() { // veja que não precisa mais de parâmetro
      double result = 0;
      switch (getMovie().getPriceCode()) {
         case Movie.REGULAR:
