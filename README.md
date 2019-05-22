@@ -596,3 +596,50 @@ class Movie...
         return result;
     }
 ```
+
+Caminhando para o final, vamos decompor `getCharge`, criando métodos específicos nas subclasses de `Price` (veja que na classe `Price`, propriamente dita, `getCharge` vai ficar como um método abstrato):
+
+```java
+class Price...
+   abstract double getCharge(int daysRented);
+     
+class RegularPrice ...
+   double getCharge(int daysRented) {
+      double result = 2;
+      if (daysRented > 2)
+         result += (daysRented - 2) * 1.5;
+      return result;
+   }
+     
+class ChildrensPrice ...
+    double getCharge(int daysRented) {
+       double result = 1.5;
+       if (daysRented > 3)
+          result += (daysRented - 3) * 1.5;
+       return result;
+     }
+     
+class NewReleasePrice ...
+    double getCharge(int daysRented){
+       return daysRented * 3;
+    } 
+```
+
+E agora vamos fazer algo bem parecido com o método `getFrequentRenterPoints`. 
+
+Para isso, como um primeiro passo, ainda intermediário, vamos mover ele de `Movie` para `Price`:
+  
+```java  
+class Movie ...
+   int getFrequentRenterPoints(int daysRented) {
+         return _price.getFrequentRenterPoints(daysRented);
+   }
+   
+ class Price...
+   int getFrequentRenterPoints(int daysRented) {
+       if ((getPriceCode() == Movie.NEW_RELEASE) && daysRented > 1)
+           return 2;
+       else
+          return 1;
+   }
+```  
