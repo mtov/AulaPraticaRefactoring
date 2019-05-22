@@ -408,7 +408,7 @@ public String htmlStatement() {
           "</EM> frequent renter points<P>";
    return result;
 }
-```java
+```
 
 Vantagem: conseguimos reusar todos os métodos criados anteriormente, incluindo:  `getCharge()`, `getTotalCharge()` e `getTotalFrequentRenterPoints`. Com isso, a criação desse novo método foi bem rápido e não causou duplicação de código (ou uma duplicação pequena, assumindo que existem alguma lógica repetida, com o método `statement`).
 
