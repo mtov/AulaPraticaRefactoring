@@ -376,10 +376,10 @@ public String statement() {
      }
 ```
 
-Alguns pontos que pode estar pensando sobre esse refactoring:
+Dois comentários breve, sobre alguns pontos que você já pode estar pensando sobre esse refactorings:
 
-* Ele aumentou o tamanho do código: porém, também não foi tanto assim ...
-* Ele fez com o que o loop de `rentals` seja percorrido três vezes; na primeira versão do código, esse loop era executado uma única vez. Isso gera problema de performance? Talvez sim; mas, talvez na maioria dos casos, não faça diferença (pois um cliente não tem tantos filmes alugados)
+* Eles aumentaram o tamanho do código: porém, também não foi tanto assim ...
+* Eles fizeram com o que o loop de `rentals` seja percorrido três vezes; na primeira versão do código, esse loop era executado uma única vez. Isso gera problema de performance? Talvez sim; mas, provavelmente na maioria dos casos, não vai fazer tanta diferença, pois um cliente não tem tantos filmes alugados.
 
 
 **Commit & Push**
