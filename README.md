@@ -115,7 +115,7 @@ class Customer {
 
 # Refactorig 1: Extract Method
 
-Extrair um método, chamado `amountFor` de `Customer.Statement()`, que vai conter o código relativo ao comentário *determine amounts for each line*.
+Extrair um método, chamado `amountFor` de `Customer.statement()`. O método extraído vai conter o código relativo ao comentário *determine amounts for each line*.
 
 Após o Extract Method, o código de `statement` será:
 
@@ -150,7 +150,34 @@ public String statement() {
 }
 ```
 
+**Commit & Push**
 
+# Refactoring 2: Rename
 
+Renomear o parâmetro de `amounfFor` para ter o nome `aRental`. Veja abaixo a versão após a renomeação:
+
+```java
+private double amountFor(Rental aRental) {
+   double result = 0;
+   switch (aRental.getMovie().getPriceCode()) {
+      case Movie.REGULAR:
+         result += 2;
+         if (aRental.getDaysRented() > 2)
+            result += (aRental.getDaysRented() - 2) * 1.5;
+         break;
+      case Movie.NEW_RELEASE:
+         result += aRental.getDaysRented() * 3;
+         break;
+      case Movie.CHILDRENS:
+         result += 1.5;
+         if (aRental.getDaysRented() > 3)
+            result += (aRental.getDaysRented() - 3) * 1.5;
+         break;
+   }
+   return result;
+}
+```
+
+**Commit & Push**
 
 
