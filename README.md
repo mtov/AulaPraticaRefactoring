@@ -376,11 +376,41 @@ public String statement() {
      }
 ```
 
-Dois comentários breve, sobre alguns pontos que você já pode estar pensando sobre esse refactorings:
+Dois comentários breve, sobre alguns pontos que você já pode estar pensando sobre os últimos refactorings:
 
 * Eles aumentaram o tamanho do código: porém, também não foi tanto assim ...
-* Eles fizeram com o que o loop de `rentals` seja percorrido três vezes; na primeira versão do código, esse loop era executado uma única vez. Isso gera problema de performance? Talvez sim; mas, provavelmente na maioria dos casos, não vai fazer tanta diferença, pois um cliente não tem tantos filmes alugados.
+* Eles fizeram com o que o loop de `rentals` seja percorrido três vezes; na primeira versão do código, esse loop era executado uma única vez. Isso vai gerar problemas de performance? Talvez sim; mas, provavelmente na maioria dos casos, não vai fazer diferença, pois um cliente não tem tantos filmes alugados.
 
 
 **Commit & Push**
 
+# Nova feature: Statement em HTML
+
+Neste passo, não vamos refatorar, mas introduzir uma nova feature: imprimir o comprovante de aluguel em HTML.
+
+Para isso, vamos criar um novo método, chamado `htmlstatement`:
+
+```java
+public String htmlStatement() {
+   Enumeration rentals = _rentals.elements();
+   String result = "<H1>Rentals for <EM>" + getName() + "</EM></H1><P>\n";
+   while (rentals.hasMoreElements()) {
+      Rental each = (Rental) rentals.nextElement();
+      // show figures for each rental
+      result += each.getMovie().getTitle()+ ": " +
+                String.valueOf(each.getCharge()) + "<BR>\n";
+   }
+   
+   // add footer lines
+   result +=  "<P>You owe <EM>" + String.valueOf(getTotalCharge()) + "</EM><P>\n";
+   result += "On this rental you earned <EM>" +
+          String.valueOf(getTotalFrequentRenterPoints()) +
+          "</EM> frequent renter points<P>";
+   return result;
+}
+```java
+
+Vantagem: conseguimos reusar todos os métodos criados anteriormente, incluindo:  `getCharge()`, `getTotalCharge()` e `getTotalFrequentRenterPoints`. Com isso, a criação desse novo método foi bem rápido e não causou duplicação de código (ou uma duplicação pequena, assumindo que existem alguma lógica repetida, com o método `statement`).
+
+
+**Commit & Push**
