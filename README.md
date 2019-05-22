@@ -285,7 +285,10 @@ Motivação para esse refactoring (chamado Replace Temp with Query): ficar livre
 
 # Refactoring 5: Extract Method
 
-Vamos decompor mais uma vez `statement`, para ir diminuindo seu tamanho e complexidade. Para isso, vamos extrair um método, chamado `getFrequentRenterPoints` com o código relativo ao comentário *add frequent renter points*:
+Vamos decompor mais uma vez `statement`, para ir diminuindo seu tamanho e complexidade. Para isso, vamos extrair um método, chamado `getFrequentRenterPoints` com o código relativo ao comentário *add frequent renter points*.
+
+Veja como deve ficar o código após o refactoring:
+
 
 ```java
 class Customer...
