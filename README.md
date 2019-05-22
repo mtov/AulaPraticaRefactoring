@@ -127,9 +127,9 @@ class Customer {
 ```
 **COMMIT & PUSH**
 
-# Teste
+# Teste de Unidade
 
-Implemente um teste para o método `statement`. Crie alguns `Movie`; crie um `Customer` com alguns alugéis (`Rental`) e implemente um teste de unidade. 
+Implemente um teste para o método `statement`. Crie alguns objetos do tipo `Movie`; crie um `Customer` com alguns alugéis (objetos do tipo `Rental`) e implemente um teste de unidade (que vai checar se a string retornada por `statement` é realmente aquela esperada).
 
 Após cada refactoring deste roteiro (e antes de dar um push/commit), se certifique de que o teste criado continua passando.
 
