@@ -495,7 +495,7 @@ class Movie...
 }
 ```
 
-Por fim, herança, como no diagrama abaixo:
+Por fim, herança, como no diagrama abaixo (**errata**: existe um erro no diagrama, que está no livro; onde consta `getCharge`, leia-se `getPriceCode`).
 
 
 ![heranca](https://github.com/mtov/AulaPraticaRefactoring/blob/master/classdiagram.png)
