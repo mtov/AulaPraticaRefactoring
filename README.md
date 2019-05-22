@@ -501,5 +501,35 @@ Por fim, herança, como no diagrama abaixo:
 ![heranca](https://github.com/mtov/AulaPraticaRefactoring/blob/master/classdiagram.png)
 
 
+Isto é:
 
+```java
+class Movie...
+   public Movie(String name, int priceCode) {
+      _name = name;
+      _priceCode = priceCode;
+   }
+     
+abstract class Price {
+   abstract int getPriceCode();
+}
+ 
+class ChildrensPrice extends Price {
+   int getPriceCode() {
+       return Movie.CHILDRENS;
+    }
+}
+ 
+class NewReleasePrice extends Price {
+   int getPriceCode() {
+       return Movie.NEW_RELEASE;
+   }
+}
+ 
+class RegularPrice extends Price {
+   int getPriceCode() {
+       return Movie.REGULAR;
+   }
+}
+```
 
