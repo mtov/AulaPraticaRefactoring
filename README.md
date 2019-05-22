@@ -133,6 +133,8 @@ Implemente um teste para o método `statement`. Crie alguns objetos do tipo `Mov
 
 Após cada refactoring deste roteiro (e antes de dar um push/commit), se certifique de que o teste criado continua passando.
 
+**Commit & Push**
+
 # Refactorig 1: Extract Method
 
 Extrair um método, chamado `amountFor` de `Customer.statement()`; já que esse último é um método maior e que faz muitas coisas. O método extraído vai conter o código relativo ao comentário *determine amounts for each line*.
