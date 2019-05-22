@@ -2,9 +2,8 @@
 
 **Prof. Marco Tulio Valente**
 
-Aula prática sobre refactoring, usando exemplo inicial do Livro do Fowler. Em caso de dúvidas, consulte o Capítulo 1 desse livro.
+Objetivo: realizar alguns refactorings em um sistema hipotético, usado no livro do Fowler. Em caso de dúvidas, consulte o Capítulo 1 desse livro.
 
-Objetivo: realizar alguns refactorings em um sistema hipotético.
 
 Instruções:
 
