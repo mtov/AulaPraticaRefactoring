@@ -627,7 +627,7 @@ class NewReleasePrice ...
 
 E agora vamos fazer algo bem parecido com o método `getFrequentRenterPoints`. 
 
-Para isso, como um primeiro passo, ainda intermediário, vamos mover ele de `Movie` para `Price`:
+Para isso, como um primeiro passo, ainda intermediário, vamos mover esse método de `Movie` para `Price`:
   
 ```java  
 class Movie ...
@@ -638,8 +638,22 @@ class Movie ...
  class Price...
    int getFrequentRenterPoints(int daysRented) {
        if ((getPriceCode() == Movie.NEW_RELEASE) && daysRented > 1)
-           return 2;
+          return 2;
        else
           return 1;
    }
 ```  
+
+E agora vamos decompor `getFrequentRenterPoints`; ele vai ficar com uma versão "genérica e concreta" em `Price` e, outra, para tratar um caso especial, em `NewReleasePrice`:
+
+```java  
+class Price...
+   int getFrequentRenterPoints(int daysRented) {
+       return 1;
+   }
+
+class NewReleasePrice
+   int getFrequentRenterPoints(int daysRented) {
+       return (daysRented > 1) ? 2: 1;
+   }
+``` 
