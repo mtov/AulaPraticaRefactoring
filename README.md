@@ -531,7 +531,7 @@ Agora, em `Movie`, vamos:
 
 * remover o campo `_priceCode` 
 * criar um campo `_price` do tipo `Price`
-* alterar o construtor, para chamar `setPriceCode`
+* alterar o construtor, para chamar `_price.setPriceCode`
 * criar um métodos `getPriceCode` e `setPriceCode`:
 * remover o campo `_priceCode` criar um campo `_price` do tipo `Price`), alterar o construtor e criar um métodos `getPriceCode` e `setPriceCode`:
 
@@ -565,4 +565,34 @@ class Movie...
       }
    }
    
+```
+
+Mais um refactoring, agora mover `getCharge` de `Movie` para `Price`:
+
+```java
+class Movie...
+   double getCharge(int daysRented) {
+      return _price.getCharge(daysRented);
+   }
+
+  class Price...
+     double getCharge(int daysRented) {
+        double result = 0;
+        switch (getPriceCode()) {
+           case Movie.REGULAR:
+                result += 2;
+                if (daysRented > 2)
+                   result += (daysRented - 2) * 1.5;
+                break;
+           case Movie.NEW_RELEASE:
+                result += daysRented * 3;
+                break;
+           case Movie.CHILDRENS:
+                result += 1.5;
+                if (daysRented > 3)
+                    result += (daysRented - 3) * 1.5;
+                break;
+        }
+        return result;
+    }
 ```
