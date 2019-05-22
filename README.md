@@ -664,7 +664,7 @@ Pronto, com isso terminamos: **Commit & Push**
 
 # Comentário Final
 
-Para terminar mesmo, leia e reflita com calma sobre os comentários finais do Fowler (ele argumenta sobre as vantagens desse último refactoring):
+Para terminar mesmo, leia e reflita com calma sobre os comentários finais do Fowler (ele argumenta sobre as vantagens do último refactoring):
 
 > Putting in the state pattern was quite an effort. Was it worth it? The gain is that if I change any of price’s behavior, add new prices, or add extra price-dependent behavior, the change will be much easier to make. The rest of the application does not know about the use of the state pattern. For the tiny amount of behavior I currently have, it is not a big deal. In a more complex system with a dozen or so price-dependent methods, this would make a big difference. All these changes were small steps. It seems slow to write it this way, but not once did I have to open the debugger, so the process actually flowed quite quickly. It took me much longer to write this section of the book than it did to change the code.
 
