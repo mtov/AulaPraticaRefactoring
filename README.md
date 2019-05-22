@@ -227,5 +227,17 @@ class Customer...
 
 ```
 
+Estando tudo funcionando, o método pode ser removido de `Customer`; porém, ele é chamado em `statement`:
+
+```java
+thisAmount = amountFor(each);
+```
+
+Claro, essa chamada deve ser atualizada para:
+
+```java
+thisAmount = each.getCharge();
+```
+
 
 
