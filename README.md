@@ -233,11 +233,52 @@ Estando tudo funcionando, o método pode ser removido de `Customer`; porém, ele
 thisAmount = amountFor(each);
 ```
 
-Claro, essa chamada deve ser atualizada para:
+Logo, essa chamada deve ser atualizada para:
 
 ```java
 thisAmount = each.getCharge();
 ```
 
+**Commit & Push**
 
 
+# Refactoring 4: Replace Temp with Query
+
+Esse refactoring substitui uma variável local e temporária (temp) por uma chamada de função (query). No caso, vamos substituir toda referência a `thisAmount` por uma chamada a `each.getCharge()`. Veja o código após o refactoring:
+
+```java
+public String statement() {
+   double totalAmount = 0;
+   int frequentRenterPoints = 0;
+   Enumeration rentals = _rentals.elements();
+   String result = "Rental Record for " + getName() + "\n";
+   while (rentals.hasMoreElements()) {
+      Rental each = (Rental) rentals.nextElement();
+
+      // add frequent renter points
+      frequentRenterPoints ++;
+      // add bonus for a two day new release rental
+      if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
+         each.getDaysRented() > 1) frequentRenterPoints ++;
+
+      // show figures for this rental
+      result += "\t" + each.getMovie().getTitle()+ "\t" + String.valueOf
+         (each.getCharge()) + "\n";
+      totalAmount += each.getCharge();
+
+   }
+   
+   // add footer lines
+   result +=  "Amount owed is " + String.valueOf(totalAmount) + "\n";
+   result += "You earned " + String.valueOf(frequentRenterPoints)
+              + " frequent renter points";
+   return result;
+}
+```
+
+Resumindo o que foi feito acima: `thisAmount` sumiu e, nos dois pontos em que era usada, substitui-se por uma chamada a `getCharge()`.
+
+Motivação para esse refactoring (chamado Replace Temp with Query): ficar livre de variáveis temporárias, que tendem a dificultar o entendimento do código; pois você tem que lembrar o que elas armazenam. Claro, pode-se alegar que isso causa um problema de performance. Porém, esse possível problema pode ser inclusive resolvido pelo compilador (isto é, pelas estratégias de otimização de código implementadas pelo compilador de Java).
+
+
+**Commit & Push**
