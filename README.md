@@ -681,5 +681,5 @@ E também a seção que finaliza o capítulo (**Final Thoughts**):
 
 > This is a simple example, yet I hope it gives you the feeling of what refactoring is like. I’ve used several refactorings, including Extract Method (110), Move Method (142), and Replace Conditional with Polymorphism (255). All these lead to better-distributed responsibilities and code that is easier to maintain. It does look rather different from procedural style code, and that takes some getting used to. But once you are used to it, it is hard to go back to procedural programs.
 
-The most important lesson from this example is the rhythm of refactoring: test, small change, test, small change, test, small change. It is that rhythm that allows refactoring to move quickly and safely.
+> The most important lesson from this example is the rhythm of refactoring: test, small change, test, small change, test, small change. It is that rhythm that allows refactoring to move quickly and safely.
 
