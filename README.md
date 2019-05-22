@@ -498,7 +498,7 @@ class Movie...
 Por fim, herança, como no diagrama abaixo:
 
 
-![heranca](https://github.com/mtov/AulaPraticaRefactoring/classdiagram.png)
+![heranca](https://github.com/mtov/AulaPraticaRefactoring/blob/master/classdiagram.png)
 
 
 
