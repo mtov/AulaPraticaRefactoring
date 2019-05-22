@@ -249,7 +249,7 @@ Logo, essa chamada deve ser atualizada para:
 thisAmount = each.getCharge();
 ```
 
-**Commit & Push**
+ **COMMIT & PUSH**
 
 
 # Refactoring 4: Replace Temp with Query
