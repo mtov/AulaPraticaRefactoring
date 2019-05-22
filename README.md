@@ -527,7 +527,13 @@ class RegularPrice extends Price {
 }
 ```
 
-Agora, em `Movie`, vamos alterar o tipo de `_price` (vai passar a ser `Price`), alterar o construtor e criar um métodos `get` e `set`:
+Agora, em `Movie`, vamos:
+
+* remover o campo `_priceCode` 
+* criar um campo `_price` do tipo `Price`
+* alterar o construtor, para chamar `setPriceCode`
+* criar um métodos `getPriceCode` e `setPriceCode`:
+* remover o campo `_priceCode` criar um campo `_price` do tipo `Price`), alterar o construtor e criar um métodos `getPriceCode` e `setPriceCode`:
 
 ```java
 class Movie...
