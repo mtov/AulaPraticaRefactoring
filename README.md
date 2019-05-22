@@ -1,4 +1,4 @@
-# AulaPraticaRefactoring
+# Aula Prática sobre Refactoring
 
 Aula prática sobre refactoring, usando exemplo inicial do Livro do Fowler.
 
@@ -127,7 +127,7 @@ class Customer {
 
 # Refactorig 1: Extract Method
 
-Extrair um método, chamado `amountFor` de `Customer.statement()`. O método extraído vai conter o código relativo ao comentário *determine amounts for each line*.
+Extrair um método, chamado `amountFor` de `Customer.statement()`; já que esse último é um método maior e que faz muitas coisas. O método extraído vai conter o código relativo ao comentário *determine amounts for each line*.
 
 Após o Extract Method, o código de `statement` será:
 
@@ -191,5 +191,41 @@ private double amountFor(Rental aRental) {
 ```
 
 **Commit & Push**
+
+# Refactoring 3: Move Method
+
+Mover o método `amountFor(Rental)` da classe `Customer` para a classe `Rental`, já que esse método não usa informações da primeira, mas sim da segunda classe. 
+
+Inicialmente, mova esse método para `Rental`, mas com o nome `getCharge()`; a versão antiga vai ser alterada para apenas delegar a chamada, para o método movido:
+
+```
+class Rental...
+   double getCharge() {
+     double result = 0;
+     switch (getMovie().getPriceCode()) {
+        case Movie.REGULAR:
+           result += 2;
+           if (getDaysRented() > 2)
+              result += (getDaysRented() - 2) * 1.5;
+           break;
+        case Movie.NEW_RELEASE:
+           result += getDaysRented() * 3;
+           break;
+        case Movie.CHILDRENS:
+           result += 1.5;
+           if (getDaysRented() > 3)
+              result += (getDaysRented() - 3) * 1.5;
+           break;
+     }
+     return result;
+}
+
+class Customer...
+   private double amountFor(Rental aRental) {
+      return aRental.getCharge();  // agora apenas delega chamada para método movido
+   }
+
+```
+
 
 
