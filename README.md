@@ -1,6 +1,6 @@
 # AulaPraticaRefactoring
 
-Aula prática sobre refactoring (usando exemplo inicial do Livro do Fowler).
+Aula prática sobre refactoring, usando exemplo inicial do Livro do Fowler.
 
 Objetivo: realizar alguns refactorings em um sistema hipotético.
 
@@ -10,7 +10,7 @@ Instruções:
 
 * Vá seguindo o roteiro, refactoring a refactoring.
 
-* Após cada refactoing, dê um **COMMIT & PUSH** (conforme indicado). Esses commits serão usados na correção, para garantir que seguiu a sequência do roteiro, passo-a-passo.
+* Após cada refactoring, dê um **COMMIT & PUSH**. Esses commits serão usados na correção, para garantir que realizou todos os refactorings solicitados.
 
 
 # Descrição e Versão Inicial
