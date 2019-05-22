@@ -1,5 +1,7 @@
 # Aula Prática sobre Refactoring
 
+**Prof. Marco Tulio Valente**
+
 Aula prática sobre refactoring, usando exemplo inicial do Livro do Fowler.
 
 Objetivo: realizar alguns refactorings em um sistema hipotético.
@@ -660,8 +662,15 @@ class NewReleasePrice
 
 Ponto, com isso terminanos: **Commit & Push**
 
-Mas leia e reflita sobre os comentários finais do Fowler:
+Mas leia e reflita também sobre os comentários finais do Fowler (ele argumenta sobre as vantagens do refactoring final):
 
 > Putting in the state pattern was quite an effort. Was it worth it? The gain is that if I change any of price’s behavior, add new prices, or add extra price-dependent behavior, the change will be much easier to make. The rest of the application does not know about the use of the state pattern. For the tiny amount of behavior I currently have, it is not a big deal. In a more complex system with a dozen or so price-dependent methods, this would make a big difference. All these changes were small steps. It seems slow to write it this way, but not once did I have to open the debugger, so the process actually flowed quite quickly. It took me much longer to write this section of the book than it did to change the code.
 
 > I’ve now completed the second major refactoring. It is going to be much easier to change the classification structure of movies, and to alter the rules for charging and the frequent renter point system
+
+E também a seção que finaliza o capítulo (Final Thoughts):
+
+> This is a simple example, yet I hope it gives you the feeling of what refactoring is like. I’ve used several refactorings, including Extract Method (110), Move Method (142), and Replace Conditional with Polymorphism (255). All these lead to better-distributed responsibilities and code that is easier to maintain. It does look rather different from procedural style code, and that takes some getting used to. But once you are used to it, it is hard to go back to procedural programs.
+
+The most important lesson from this example is the rhythm of refactoring: test, small change, test, small change, test, small change. It is that rhythm that allows refactoring to move quickly and safely.
+
