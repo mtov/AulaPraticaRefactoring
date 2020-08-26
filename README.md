@@ -135,7 +135,7 @@ Após cada refactoring deste roteiro (e antes de dar um push/commit), se certifi
 
 **COMMIT & PUSH**
 
-# Refactorig 1: Extract Method
+# Refactoring 1: Extract Method
 
 Extrair um método, chamado `amountFor` de `Customer.statement()`; já que esse último é um método maior e que faz muitas coisas. O método extraído vai conter o código relativo ao comentário *determine amounts for each line*.
 
