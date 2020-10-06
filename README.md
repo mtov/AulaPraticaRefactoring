@@ -11,7 +11,13 @@ Instruções:
 
 * Vá seguindo o roteiro, refactoring a refactoring.
 
-* Após cada refactoring, dê um **COMMIT & PUSH**. Esses commits serão usados na correção, para garantir que realizou todos os refactorings solicitados.
+* Após cada etapa, dê um **COMMIT & PUSH**, adicionado uma descrição no commit conforme as instruções apresentadas no roteiro. Esses commits serão usados na correção, para garantir que realizou todos os refactorings solicitados. 
+
+Observações: 
+
+* Os resultados desta aula prática podem ser usados em trabalhos futuros do nosso grupo de pesquisa.
+
+* Códigos que não compilam serão avaliados com **nota zero**.
 
 
 # Versão Inicial
@@ -20,7 +26,7 @@ As classes que vamos usar fazem parte de um sistema de video-locadora, para alug
 
 Inicialmente, são três classes: `Movie` (filmes que podem ser alugados), `Rental` (dados de um aluguel) e `Customer` (clientes da locadora).
 
-
+* Copie o código da classe `Movie` para um arquivo chamado `Movie.java`:
 ```java
 public class Movie {
 
@@ -41,31 +47,45 @@ public class Movie {
   }
 
   public void setPriceCode(int arg) {
-     _priceCode = arg;
+      _priceCode = arg;
   }
 
   public String getTitle (){
       return _title;
   };
 }
+```
 
-class Rental {
-    private Movie _movie;
-    private int _daysRented;
+* Copie o código da classe `Rental` para um arquivo chamado `Rental.java`:
 
-    public Rental(Movie movie, int daysRented) {
+```java
+public class Rental {
+
+   private Movie _movie;
+   private int _daysRented;
+
+   public Rental(Movie movie, int daysRented) {
       _movie = movie;
       _daysRented = daysRented;
-    }
-    public int getDaysRented() {
-      return _daysRented;
-    }
-    public Movie getMovie() {
-      return _movie;
-    }
-}
+   }
 
-class Customer {
+   public int getDaysRented() {
+      return _daysRented;
+   }
+
+   public Movie getMovie() {
+      return _movie;
+   }
+}
+```
+
+* Copie o código da classe `Customer` para um arquivo chamado `Customer.java`:
+
+```java
+import java.util.Enumeration;
+import java.util.Vector;
+
+public class Customer {
    private String _name;
    private Vector _rentals = new Vector();
 
@@ -123,138 +143,89 @@ class Customer {
      result += "You earned " + String.valueOf(frequentRenterPoints) +
              " frequent renter points";
      return result;
+   }
 }
 ```
-**COMMIT & PUSH**
 
-# Teste de Unidade
+Verifique se existem erros de compilação no seu código.
 
-Implemente um teste para o método `statement`. Crie alguns objetos do tipo `Movie`; crie um `Customer` com alguns aluguéis (isto é, objetos do tipo `Rental`) e implemente um teste de unidade. Esse teste deve checar se a string retornada por `statement` é realmente aquela esperada.
-
-Após cada refactoring deste roteiro (e antes de dar um push/commit), se certifique de que o teste criado continua passando.
-
-**COMMIT & PUSH**
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 1"**)
 
 # Refactoring 1: Extract Method
 
-Extrair um método, chamado `amountFor` de `Customer.statement()`; já que esse último é um método maior e que faz muitas coisas. O método extraído vai conter o código relativo ao comentário *determine amounts for each line*.
+* **Extrair um método** chamado `amountFor(Rental each)` de `Customer.statement()`; já que esse último é um método maior e que faz muitas coisas. O método extraído vai conter o código relativo ao comentário *determine amounts for each line*, ou seja, você deve extrair o trecho de código referente ao `switch-case`.
 
-Após o Extract Method, o código de `statement` será:
+* Lembre-se de atualizar a chamada em `statement()` após as modificações:
 
 ```java
-public String statement() {
-   double totalAmount = 0;
-   int frequentRenterPoints = 0;
-   Enumeration rentals = _rentals.elements();
-   String result = "Rental Record for " + getName() + "\n";
-   while (rentals.hasMoreElements()) {
-      double thisAmount = 0;
-      Rental each = (Rental) rentals.nextElement();
-
+class Customer ...
+   public String statement() {
+      ...
       thisAmount = amountFor(each);
+      ...
+   }
 
-      // add frequent renter points
-      frequentRenterPoints ++;
-      // add bonus for a two day new release rental
-      if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
-         each.getDaysRented() > 1) frequentRenterPoints ++;
-
-      //show figures for this rental
-      result += "\t" + each.getMovie().getTitle()+ "\t" +
-          String.valueOf(thisAmount) + "\n";
-      totalAmount += thisAmount;
-   } 
-   //add footer lines
-   result +=  "Amount owed is " + String.valueOf(totalAmount) + "\n";
-   result += "You earned " + String.valueOf(frequentRenterPoints) +
-            " frequent renter points";
-   return result;
-}
+   private String amountFor(Rental each) {
+      //Adicionar o trecho de código extraído.
+   }
 ```
+Verifique se existem erros de compilação no seu código.
 
-**COMMIT & PUSH**
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 2"**)
 
 # Refactoring 2: Rename
 
-Renomear o parâmetro de `amounfFor` para ter o nome `aRental`. Veja abaixo a versão após a renomeação:
+* **Renomear** o parâmetro de `amountFor` para ter o nome `aRental`, ou seja, você precisa modificar:
 
 ```java
-private double amountFor(Rental aRental) {
-   double result = 0;
-   switch (aRental.getMovie().getPriceCode()) {
-      case Movie.REGULAR:
-         result += 2;
-         if (aRental.getDaysRented() > 2)
-            result += (aRental.getDaysRented() - 2) * 1.5;
-         break;
-      case Movie.NEW_RELEASE:
-         result += aRental.getDaysRented() * 3;
-         break;
-      case Movie.CHILDRENS:
-         result += 1.5;
-         if (aRental.getDaysRented() > 3)
-            result += (aRental.getDaysRented() - 3) * 1.5;
-         break;
-   }
-   return result;
+private double amountFor(Rental each){
+   ...
 }
 ```
 
-**COMMIT & PUSH**
-
-# Refactoring 3: Move Method
-
-Mover o método `amountFor(Rental)` da classe `Customer` para a classe `Rental`, já que esse método não usa informações da primeira, mas sim da segunda classe. 
-
-Inicialmente, mova esse método para `Rental`, mas com o nome `getCharge()`; a versão antiga vai ser alterada para apenas delegar a chamada, para o método movido.  A ideia é que refactorings devem ser feitos em pequenos passos, para garantir que nada está sendo quebrado.
+Para:
 
 ```java
-class Rental...
-   double getCharge() { // veja que não precisa mais de parâmetro
-     double result = 0;
-     switch (getMovie().getPriceCode()) {
-        case Movie.REGULAR:
-           result += 2;
-           if (getDaysRented() > 2)
-              result += (getDaysRented() - 2) * 1.5;
-           break;
-        case Movie.NEW_RELEASE:
-           result += getDaysRented() * 3;
-           break;
-        case Movie.CHILDRENS:
-           result += 1.5;
-           if (getDaysRented() > 3)
-              result += (getDaysRented() - 3) * 1.5;
-           break;
-     }
-     return result;
+private double amountFor(Rental aRental){
+   ...
 }
+```
+Verifique se existem erros de compilação no seu código.
 
-class Customer...
-   private double amountFor(Rental aRental) {
-      return aRental.getCharge();  // agora apenas delega chamada para método movido
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 3"**)
+
+
+# Refactoring 3: Move and Rename Method
+
+* **Mover o método** `amountFor(Rental each)` da classe `Customer` para a classe `Rental`, já que esse método não usa informações da primeira, mas sim da segunda classe. O método deve ser movido com um **novo nome** `getCharge()`. A ideia é que refactorings devem ser feitos em pequenos passos, para garantir que nada está sendo quebrado.
+
+* Lembre-se de atualizar a chamada em `statement()`, ou seja: 
+
+```java
+class Customer ...
+   public String statement() {
+      ...
+      thisAmount = each.getCharge();
+      ...
    }
-
 ```
-
-Estando tudo funcionando, o método pode ser removido de `Customer`; porém, ele é chamado em `statement`:
 
 ```java
-thisAmount = amountFor(each);
+class Rental ...
+   public String getCharge() {
+      ...
+   }
 ```
 
-Logo, essa chamada deve ser atualizada para:
+**Dica:** Observe que após mover e renomear o método, você deve **remover o parâmetro** `Rental`. Este parâmetro é desnecessário, já que os métodos chamados estão na mesma classe.
 
-```java
-thisAmount = each.getCharge();
-```
+Verifique se existem erros de compilação no seu código.
 
- **COMMIT & PUSH**
-
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 4"**)
 
 # Refactoring 4: Replace Temp with Query
 
-Esse refactoring substitui uma variável local e temporária (temp) por uma chamada de função (query). No caso, vamos substituir toda referência a `thisAmount` por uma chamada a `each.getCharge()`. Veja o código após o refactoring:
+Esse refactoring substitui uma variável local e temporária (temp) por uma chamada de função (query). No caso, vamos **substituir** toda referência a `thisAmount` por uma chamada a `each.getCharge()`  em `Customer.statement()`. Veja o código após o refactoring:
 
 ```java
 public String statement() {
@@ -290,100 +261,89 @@ Resumindo o que foi feito acima: `thisAmount` sumiu e, nos dois pontos em que er
 
 Motivação para esse refactoring (chamado Replace Temp with Query): ficar livre de variáveis temporárias, que tendem a dificultar o entendimento do código; pois você tem que lembrar o que elas armazenam. Claro, pode-se alegar que isso causa um problema de performance. Porém, esse possível problema pode ser inclusive resolvido pelo compilador (isto é, pelas estratégias de otimização de código implementadas pelo compilador de Java).
 
+Verifique se existem erros de compilação no seu código.
 
-**COMMIT & PUSH**
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 5"**)
 
-# Refactoring 5: Extract Method
+# Refactoring 5: Extract and Move Method
 
-Vamos decompor mais uma vez `statement`, para ir diminuindo seu tamanho e complexidade. Para isso, vamos extrair um método, chamado `getFrequentRenterPoints` com o código relativo ao comentário *add frequent renter points*.
+* Vamos decompor mais uma vez `statement()`, para ir diminuindo o seu tamanho e complexidade. Para isso, vamos **extrair um método** chamado `getFrequentRenterPoints()`  com o código relativo ao comentário *add frequent renter points*. Você precisa **mover** o método extraído para a classe `Rental`.
 
-Veja como deve ficar o código após o refactoring:
+* A variável `frequentRenterPoints` receberá o retorno da função extraída: 
 
 
 ```java
-class Customer...
+class Customer ...
    public String statement() {
-      double totalAmount = 0;
-      int frequentRenterPoints = 0;
-      Enumeration rentals = _rentals.elements();
-      String result = "Rental Record for " + getName() + "\n";
-      while (rentals.hasMoreElements()) {
-         Rental each = (Rental) rentals.nextElement();
-         
-         frequentRenterPoints += each.getFrequentRenterPoints();
-
-         // show figures for this rental
-         result += "\t" + each.getMovie().getTitle()+ "\t" +
-                String.valueOf(each.getCharge()) + "\n";
-         totalAmount += each.getCharge();
-      }
-
-      // add footer lines
-      result +=  "Amount owed is " + String.valueOf(totalAmount) + "\n";
-      result += "You earned " + String.valueOf(frequentRenterPoints) +
-             " frequent renter points";
-      return result;
-  }
-
-class Rental...
-   int getFrequentRenterPoints() {
-       if ((getMovie().getPriceCode() == Movie.NEW_RELEASE) && getDaysRented() > 1)
-          return 2;
-       else
-          return 1;
+      ...
+      frequentRenterPoints += each.getFrequentRenterPoints();
+      ...
    }
 ```
 
-**COMMIT & PUSH**
+```java
+class Rental ...
+   public int getFrequentRenterPoints() { {
+      //Adicionar o trecho de código extraído.
+   }
+```
+
+**Dica:** Você deve extrair a condição que verifica se o filme refere-se a um novo lançamento (NEW_RELEASE). Se a condição for verdadeira, `getFrequentRenterPoints()` retorna 2. Caso contrário, retorna 1, ou seja, sem bônus. 
+
+Verifique se existem erros de compilação no seu código.
+
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 6"**)
 
 # Refactoring 6: Replace Temp With Query
 
-Mais duas variáveis locais (temp) vão ser extraídas para funções (queries). São elas:
+Mais duas variáveis locais (temp) vão ser extraídas para funções (queries) na classe `Customer`. São elas:
 
 * `totalAmount` vai ser substituída por `getTotalCharge()`
-* `frequentRenterPoints` vai ser substituída por `getTotalFrequentRenterPoints`.
+* `frequentRenterPoints` vai ser substituída por `getTotalFrequentRenterPoints()`.
 
 Veja como deve ficar o código após esses dois refactorings:
 
 
 ```java
-public String statement() {
-   Enumeration rentals = _rentals.elements();
-   String result = "Rental Record for " + getName() + "\n";
-   while (rentals.hasMoreElements()) {
-      Rental each = (Rental) rentals.nextElement();
+class Customer...
 
-      // show figures for this rental
-      result += "\t" + each.getMovie().getTitle()+ "\t" +
-                String.valueOf(each.getCharge()) + "\n";
+   public String statement() {
+      Enumeration rentals = _rentals.elements();
+      String result = "Rental Record for " + getName() + "\n";
+      while (rentals.hasMoreElements()) {
+         Rental each = (Rental) rentals.nextElement();
+
+         // show figures for this rental
+         result += "\t" + each.getMovie().getTitle()+ "\t" +
+                  String.valueOf(each.getCharge()) + "\n";
+      }
+
+      // add footer lines
+      result +=  "Amount owed is " + String.valueOf(getTotalCharge()) + "\n";
+      result += "You earned " + String.valueOf(getTotalFrequentRenterPoints()) +
+                     " frequent renter points";
+      return result;
+   }
+      
+   private double getTotalCharge() {
+      double result = 0;
+      Enumeration rentals = _rentals.elements();
+      while (rentals.hasMoreElements()) {
+         Rental each = (Rental) rentals.nextElement();
+         result += each.getCharge();
+         }
+         return result;
    }
 
-   // add footer lines
-   result +=  "Amount owed is " + String.valueOf(getTotalCharge()) + "\n";
-   result += "You earned " + String.valueOf(getTotalFrequentRenterPoints()) +
-                   " frequent renter points";
-   return result;
-}
-    
-    private double getTotalCharge() {
-       double result = 0;
-       Enumeration rentals = _rentals.elements();
-       while (rentals.hasMoreElements()) {
-          Rental each = (Rental) rentals.nextElement();
-          result += each.getCharge();
-       }
-       return result;
-     }
-
-     private int getTotalFrequentRenterPoints(){
-        int result = 0;
-        Enumeration rentals = _rentals.elements();
-        while (rentals.hasMoreElements()) {
-           Rental each = (Rental) rentals.nextElement();
-           result += each.getFrequentRenterPoints();
-        }
-        return result;
-     }
+   private int getTotalFrequentRenterPoints(){
+      int result = 0;
+      Enumeration rentals = _rentals.elements();
+      while (rentals.hasMoreElements()) {
+         Rental each = (Rental) rentals.nextElement();
+         result += each.getFrequentRenterPoints();
+      }
+      return result;
+   }
 ```
 
 Dois comentários breve, sobre alguns pontos que você já pode estar pensando sobre os últimos refactorings:
@@ -391,118 +351,97 @@ Dois comentários breve, sobre alguns pontos que você já pode estar pensando s
 * Eles aumentaram o tamanho do código: porém, também não foi tanto assim ...
 * Eles fizeram com o que o loop de `rentals` seja percorrido três vezes; na primeira versão do código, esse loop era executado uma única vez. Isso vai gerar problemas de performance? Talvez sim; mas, provavelmente na maioria dos casos, não vai fazer diferença, pois um cliente não tem tantos filmes alugados.
 
+Verifique se existem erros de compilação no seu código.
 
-**COMMIT & PUSH**
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 7"**)
 
 # Nova feature: Statement em HTML
 
 Neste passo, não vamos refatorar, mas introduzir uma nova feature: imprimir o comprovante de aluguel em HTML.
 
-Para isso, vamos criar um novo método, chamado `htmlstatement`:
+Para isso, vamos criar um novo método, chamado `htmlstatement` na classe `Customer`:
 
 ```java
-public String htmlStatement() {
-   Enumeration rentals = _rentals.elements();
-   String result = "<H1>Rentals for <EM>" + getName() + "</EM></H1><P>\n";
-   while (rentals.hasMoreElements()) {
-      Rental each = (Rental) rentals.nextElement();
-      // show figures for each rental
-      result += each.getMovie().getTitle()+ ": " +
-                String.valueOf(each.getCharge()) + "<BR>\n";
-   }
-   
-   // add footer lines
-   result +=  "<P>You owe <EM>" + String.valueOf(getTotalCharge()) + "</EM><P>\n";
-   result += "On this rental you earned <EM>" +
-          String.valueOf(getTotalFrequentRenterPoints()) +
-          "</EM> frequent renter points<P>";
-   return result;
-}
-```
-
-Vantagem: conseguimos reusar todos os métodos criados anteriormente, incluindo:  `getCharge()`, `getTotalCharge()` e `getTotalFrequentRenterPoints`. Por isso, a criação do novo método foi bem rápida e não causou duplicação de código (ou uma duplicação pequena, assumindo que ainda existe alguma lógica repetida, com o método `statement`).
-
-
-**COMMIT & PUSH**
-
-# Refactoring 7: Replace Conditional with Polymorphism
-
-Primeiro, não faz sentido ter um switch que depende de um atributo (`_priceCode`) de uma outra classe (`Movie)`, como em:
-
-```java
-class Rental...
-   double getCharge() {
-      double result = 0;
-      switch (getMovie().getPriceCode()) {
-         case Movie.REGULAR:
-            result += 2;
-             if (getDaysRented() > 2)
-                result += (getDaysRented() - 2) * 1.5;
-             break;
-         case Movie.NEW_RELEASE:
-            result += getDaysRented() * 3;
-            break;
-         case Movie.CHILDRENS:
-            result += 1.5;
-            if (getDaysRented() > 3)
-               result += (getDaysRented() - 3) * 1.5;
-            break;
-       }
-       return result;
-  }
-```
-
-Logo, vamos extrair esse switch para um método e depois movê-lo para a class `Movie`:
-
-```java
-class Movie...
-   double getCharge(int daysRented) {
-      double result = 0;
-      switch (getPriceCode()) {
-         case Movie.REGULAR:
-            result += 2;
-            if (daysRented > 2)
-               result += (daysRented - 2) * 1.5;
-            break;
-         case Movie.NEW_RELEASE:
-            result += daysRented * 3;
-            break;
-         case Movie.CHILDRENS:
-            result += 1.5;
-            if (daysRented > 3)
-               result += (daysRented - 3) * 1.5;
-            break;
+class Customer ...
+   public String htmlStatement() {
+      Enumeration rentals = _rentals.elements();
+      String result = "<H1>Rentals for <EM>" + getName() + "</EM></H1><P>\n";
+      while (rentals.hasMoreElements()) {
+         Rental each = (Rental) rentals.nextElement();
+         // show figures for each rental
+         result += each.getMovie().getTitle()+ ": " +
+                  String.valueOf(each.getCharge()) + "<BR>\n";
       }
+      
+      // add footer lines
+      result +=  "<P>You owe <EM>" + String.valueOf(getTotalCharge()) + "</EM><P>\n";
+      result += "On this rental you earned <EM>" +
+            String.valueOf(getTotalFrequentRenterPoints()) +
+            "</EM> frequent renter points<P>";
       return result;
    }
 ```
 
-O método antigo agora apenas inclui uma chamada para o método novo:
+Vantagem: conseguimos reusar todos os métodos criados anteriormente, incluindo:  `getCharge()`, `getTotalCharge()` e `getTotalFrequentRenterPoints()`. Por isso, a criação do novo método foi bem rápida e não causou duplicação de código (ou uma duplicação pequena, assumindo que ainda existe alguma lógica repetida, com o método `statement`).
 
-```java
-class Rental...
-   double getCharge() {
+Verifique se existem erros de compilação no seu código.
+
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 8"**)
+
+# Refactoring 7: Replace Conditional with Polymorphism
+
+Nós vamos realizar este refactoring em sete etapas.
+
+## Etapa 1: Extract and Move Method
+
+* Primeiro, não faz sentido ter um switch que depende de um atributo (`_priceCode`) de uma outra classe (`Movie`). Logo, você deve **extrair e mover** o código de `getCharge()` na classe Rental para um método chamado `getCharge(int daysRented)` na classe Movie.
+
+* O método antigo agora apenas inclui uma chamada para o método novo: 
+
+```java 
+class Rental ...
+   public double getCharge(){
       return _movie.getCharge(_daysRented);
    }
 ```
 
-Vamos agora também mover `getFrequentRenterPoints` para `Movie`; ou seja, é melhor que métodos que usam informações sobre tipos de filme estejam todos na classe `Movie`:
-
-```java
-class Rental...
-   int getFrequentRenterPoints() {
-       return _movie.getFrequentRenterPoints(_daysRented);
+```java 
+class Movie ...
+   public double getCharge(int daysRented){
+       //Adicionar o trecho de código extraído.
    }
-
-
-class Movie...
-   int getFrequentRenterPoints(int daysRented) {
-       if ((getPriceCode() == Movie.NEW_RELEASE) && daysRented > 1)
-          return 2;
-       else
-          return 1;
-}
 ```
+
+Verifique se existem erros de compilação no seu código.
+
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 9"**)
+
+## Etapa 2: Extract and Move Method
+
+* Vamos agora também **extrair** o código de `getFrequentRenterPoints()`  para `getFrequentRenterPoints(int daysRented)` e **movê-lo** para a classe `Movie`; ou seja, é melhor que métodos que usam informações sobre tipos de filme estejam todos na classe `Movie`.
+
+* O método antigo agora apenas inclui uma chamada para o método novo: 
+
+
+```java 
+class Rental ...
+   public double getFrequentRenterPoints(){
+      return _movie.getFrequentRenterPoints(_daysRented);
+   }
+```
+
+```java 
+class Movie ...
+   public double getFrequentRenterPoints(int daysRented){
+       //Adicionar o trecho de código extraído.
+   }
+```
+
+Verifique se existem erros de compilação no seu código.
+
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 10"**)
+
+## Etapa 3: Herança
 
 Por fim, herança, como no diagrama abaixo (**errata**: existe um erro no diagrama, que está no livro; onde consta `getCharge`, leia-se `getPriceCode`).
 
@@ -510,35 +449,47 @@ Por fim, herança, como no diagrama abaixo (**errata**: existe um erro no diagra
 ![heranca](https://github.com/mtov/AulaPraticaRefactoring/blob/master/classdiagram.png)
 
 
-Isto é:
+* Isto é, copie o código da classe `Price` para um arquivo chamado `Price.java`:
+
 
 ```java     
-abstract class Price {
-   abstract int getPriceCode();
+public abstract class Price {
+   public abstract int getPriceCode();
 }
- 
-class ChildrensPrice extends Price {
-   int getPriceCode() {
+```  
+
+* Copie o código da classe `ChildrensPrice` para um arquivo chamado `ChildrensPrice.java`:
+
+```java  
+public class ChildrensPrice extends Price {
+   public int getPriceCode() {
        return Movie.CHILDRENS;
    }
 }
- 
-class NewReleasePrice extends Price {
-   int getPriceCode() {
+```
+
+* Copie o código da classe `NewReleasePrice` para um arquivo chamado `NewReleasePrice.java`:
+
+```java
+public class NewReleasePrice extends Price {
+   public int getPriceCode() {
        return Movie.NEW_RELEASE;
    }
 }
- 
-class RegularPrice extends Price {
-   int getPriceCode() {
+```
+
+* Finalmente, copie o código da classe `RegularPrice` para um arquivo chamado `RegularPrice.java`:
+
+```java
+public class RegularPrice extends Price {
+   public int getPriceCode() {
        return Movie.REGULAR;
    }
 }
 ```
 
 Agora, em `Movie`, vamos:
-
-* remover o campo `_priceCode` 
+ remover o campo `_priceCode` 
 * criar um campo `_price` do tipo `Price`
 * alterar o construtor, para chamar `_price.setPriceCode`
 * criar um métodos `getPriceCode` e `setPriceCode`:
@@ -573,105 +524,291 @@ class Movie...
             throw new IllegalArgumentException("Incorrect Price Code");
       }
    }
-   
+   ...
 ```
 
-Mais um refactoring, agora mover `getCharge` de `Movie` para `Price`:
+Verifique se existem erros de compilação no seu código.
+
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 11"**)
+
+## Etapa 4: Extract and Move Method
+
+* Mais um refactoring, agora você precisa  **extrair e mover** `getCharge(int)` da classe `Movie` para `getCharge(int)` na classe `Price`.
+
+* O método antigo agora apenas inclui uma chamada para o método novo: 
 
 ```java
-class Movie...
-   double getCharge(int daysRented) {
-      return _price.getCharge(daysRented);
+class Movie ...
+   public int getCharge(int daysRented) {
+         return _price.getCharge(daysRented);
    }
+```  
 
-  class Price...
-     double getCharge(int daysRented) {
-        double result = 0;
-        switch (getPriceCode()) {
-           case Movie.REGULAR:
-                result += 2;
-                if (daysRented > 2)
-                   result += (daysRented - 2) * 1.5;
-                break;
-           case Movie.NEW_RELEASE:
-                result += daysRented * 3;
-                break;
-           case Movie.CHILDRENS:
-                result += 1.5;
-                if (daysRented > 3)
-                    result += (daysRented - 3) * 1.5;
-                break;
-        }
-        return result;
-    }
-```
+```java
+class Price ...
+   public int getCharge(int daysRented) {
+      //Adicionar o trecho de código extraído.
+   }
+```  
 
-Caminhando para o final, vamos decompor `getCharge`, criando métodos específicos nas subclasses de `Price` (veja que na classe `Price`, propriamente dita, `getCharge` vai ficar como um método abstrato):
+Verifique se existem erros de compilação no seu código.
+
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 12"**)
+
+## Etapa 5: Herança
+
+* Caminhando para o final, vamos decompor `getCharge`, criando métodos específicos nas subclasses de `Price` (veja que na classe `Price`, propriamente dita, `getCharge` vai ficar como um método abstrato):
 
 ```java
 class Price...
-   abstract double getCharge(int daysRented);
-     
+   public abstract double getCharge(int daysRented);
+```
+
+```java
+class ChildrensPrice ...
+   public double getCharge(int daysRented) {
+      double result = 1.5;
+      if (daysRented > 3)
+         result += (daysRented - 3) * 1.5;
+      return result;
+   }
+```
+
+```java    
+class NewReleasePrice ...
+   public double getCharge(int daysRented){
+      return daysRented * 3;
+   } 
+```
+
+```java
 class RegularPrice ...
-   double getCharge(int daysRented) {
+   public double getCharge(int daysRented) {
       double result = 2;
       if (daysRented > 2)
          result += (daysRented - 2) * 1.5;
       return result;
    }
-     
-class ChildrensPrice ...
-    double getCharge(int daysRented) {
-       double result = 1.5;
-       if (daysRented > 3)
-          result += (daysRented - 3) * 1.5;
-       return result;
-     }
-     
-class NewReleasePrice ...
-    double getCharge(int daysRented){
-       return daysRented * 3;
-    } 
 ```
 
-E agora vamos fazer algo bem parecido com o método `getFrequentRenterPoints`. 
+Verifique se existem erros de compilação no seu código.
 
-Para isso, como um primeiro passo, ainda intermediário, vamos mover esse método de `Movie` para `Price`:
-  
-```java  
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 13"**)
+
+
+## Etapa 6: Extract and Move Method 
+
+* E agora vamos fazer algo bem parecido com o método `getFrequentRenterPoints(int)`. Para isso, como um primeiro passo, ainda intermediário, você precisa **extrair e mover** o código de `getFrequentRenterPoints(int)` da classe `Movie` para o método `getFrequentRenterPoints(int)` em `Price`.
+
+* O método antigo agora apenas inclui uma chamada para o método novo: 
+
+```java
 class Movie ...
-   int getFrequentRenterPoints(int daysRented) {
-         return _price.getFrequentRenterPoints(daysRented);
-   }
-   
- class Price...
-   int getFrequentRenterPoints(int daysRented) {
-       if ((getPriceCode() == Movie.NEW_RELEASE) && daysRented > 1)
-          return 2;
-       else
-          return 1;
+   public int getFrequentRenterPoints(int daysRented) {
+      return _price.getFrequentRenterPoints(daysRented);
    }
 ```  
 
-E agora vamos decompor `getFrequentRenterPoints`; ele vai ficar com uma versão "genérica e concreta" em `Price` e, outra, para tratar um caso especial, em `NewReleasePrice`:
+```java
+class Price ...
+   public int getFrequentRenterPoints(int daysRented) {
+      //Adicionar o trecho de código extraído.
+   }
+```  
+
+Verifique se existem erros de compilação no seu código.
+
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 14"**)
+
+
+## Etapa 7: Herança 
+
+* E agora vamos decompor `getFrequentRenterPoints`; ele vai ficar com uma versão "genérica e concreta" em `Price` e, outra, para tratar um caso especial, em `NewReleasePrice`:
 
 ```java  
 class Price...
-   int getFrequentRenterPoints(int daysRented) {
+   public int getFrequentRenterPoints(int daysRented) {
        return 1;
    }
+```
 
+```java  
 class NewReleasePrice
-   int getFrequentRenterPoints(int daysRented) {
+   public int getFrequentRenterPoints(int daysRented) {
        return (daysRented > 1) ? 2: 1;
    }
 ``` 
 
-Pronto, com isso terminamos: **COMMIT & PUSH**
+Verifique se existem erros de compilação no seu código.
+
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 15"**)
+
+
+# Refactoring 8: Template Method
+
+Este refactoring será realizado em duas etapas.
+
+## Etapa 1: Herança
+A classe `Customer` possui dois métodos para imprimir informações sobre a dívida dos clientes.
+
+O método `statement()` imprime os dados em formato ASCII e o método `htmlStatement()` em formato HTML: 
+
+```java
+class Customer...
+   public String statement() {
+      ...
+   }
+
+   public String htmlStatement() {
+      ...
+   }
+```
+
+Podemos observar que os métodos acima possuem trechos de código similares. O refactoring **Template Method** é recomendado para remover esta duplicação de código. 
+
+Inicialmente, precisamos organizar estes métodos em duas classes com uma superclasse em comum, como no diagrama abaixo:
+
+![heranca](classdiagram_template_method.png)
+
+
+* Isto é, copie o código da classe `Statement` para um arquivo chamado `Statement.java`:
+
+```java
+public class Statement {
+
+}
+```
+
+* Copie o código da subclasse `TextStatement` para um arquivo chamado `TextStatement.java`:
+
+```java
+public class TextStatement extends Statement {
+
+}
+```
+
+* Copie o código da subclasse `HtmlStatement` para um arquivo chamado `HtmlStatement.java`:
+
+```java
+public class HtmlStatement extends Statement {
+
+}
+```
+
+* Em seguida, você deve **extrair e mover** o código de `statement()` para um método chamado `value` na classe `TextStatement`. O método antigo agora apenas inclui uma chamada para o método novo:
+
+```java
+class Customer...
+   public String statement() {
+      return new TextStatement().value(this);
+   }
+```
+
+```java
+import java.util.Enumeration;
+
+class TextStatement...
+   public String value(Customer aCustomer) {
+      Enumeration rentals = aCustomer.getRentals();
+      String result = "Rental Record for " + aCustomer.getName() +
+      "\n";
+      while (rentals.hasMoreElements()) {
+         Rental each = (Rental) rentals.nextElement();
+         //show figures for this rental
+         result += "\t" + each.getMovie().getTitle()+ "\t" +
+         String.valueOf(each.getCharge()) + "\n";
+      }
+      //add footer lines
+      result += "Amount owed is " +
+      String.valueOf(aCustomer.getTotalCharge()) + "\n";
+      result += "You earned " +
+      String.valueOf(aCustomer.getTotalFrequentRenterPoints()) +
+      " frequent renter points";
+      return result;
+   }
+
+```
+
+* Precisamos tornar os métodos `getTotalFrequentRenterPoints()` e `getTotalCharge()` públicos na classe `Customer` para acessá-los em `TextStatement`. Além disso, precisamos adicionar `getRentals()`
+
+```java
+class Customer ...
+
+   public Enumeration getRentals() {
+	   return _rentals.elements();
+   }
+
+   public double getTotalCharge() {
+      ...
+   }
+
+   public int getTotalFrequentRenterPoints(){
+      ...
+   }
+```
+
+* Da mesma forma, você deve **extrair e mover** o código de `htmlStatement()` para um método chamado `value` na classe `HtmlStatement`. O método antigo agora apenas inclui uma chamada para o método novo:
+
+```java
+class Customer...
+   public String htmlStatement() {
+      return new HtmlStatement().value(this);
+   }
+```
+
+```java
+import java.util.Enumeration;
+
+class HtmlStatement...
+   public String value(Customer aCustomer) {
+      Enumeration rentals = aCustomer.getRentals();
+      String result = "<H1>Rentals for <EM>" + aCustomer.getName() +
+      "</EM></H1><P>\n";
+      while (rentals.hasMoreElements()) {
+         Rental each = (Rental) rentals.nextElement();
+         //show figures for each rental
+         result += each.getMovie().getTitle()+ ": " +
+         String.valueOf(each.getCharge()) + "<BR>\n";
+      }
+      //add footer lines
+      result += "<P>You owe <EM>" +
+      String.valueOf(aCustomer.getTotalCharge()) + "</EM><P>\n";
+      result += "On this rental you earned <EM>" + 
+      String.valueOf(aCustomer.getTotalFrequentRenterPoints()) +
+      "</EM> frequent renter points<P>";
+      return result;
+   }
+```
+
+Agora, nós temos dois métodos similares nas respectivas subclasses.
+
+Verifique se existem erros de compilação no seu código. 
+
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 16"**)
+
+
+## Etapa 2: Template Method
+
+Nesta última etapa do exercício você deve refatorar os métodos `value` nas subclasses `TextStatement` e  `HtmlStatement`, aplicando o refactoring **Template Method** para eliminar o código duplicado. Esta etapa deve ser realizada em um **único commit**.
+
+O método `value` será o template na superclasse.
+
+**Dica**: Observe os métodos em cada subclasse:  
+ 
+* *Quais trechos de código são similiares?* 
+
+* *Quais trechos do código são diferentes e podem ser extraídos?*
+
+ 
+
+Ao final, verifique se não existem erros de compilação. 
+
+Pronto, com isso terminamos: **COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 17"**)
+
 
 # Comentário Final
 
-Para terminar mesmo, leia e reflita com calma sobre os comentários finais do Fowler (ele argumenta sobre as vantagens do último refactoring):
+Para terminar mesmo, leia e reflita com calma sobre os comentários finais do Fowler (ele argumenta sobre as vantagens do Refactoring 7):
 
 > Putting in the state pattern was quite an effort. Was it worth it? The gain is that if I change any of price’s behavior, add new prices, or add extra price-dependent behavior, the change will be much easier to make. The rest of the application does not know about the use of the state pattern. For the tiny amount of behavior I currently have, it is not a big deal. In a more complex system with a dozen or so price-dependent methods, this would make a big difference. All these changes were small steps. It seems slow to write it this way, but not once did I have to open the debugger, so the process actually flowed quite quickly. It took me much longer to write this section of the book than it did to change the code.
 
