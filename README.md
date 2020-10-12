@@ -780,7 +780,7 @@ class HtmlStatement...
    }
 ```
 
-Agora, nós temos dois métodos similares nas respectivas subclasses.
+Agora, nós temos dois métodos similares nas respectivas subclasses. 
 
 Verifique se existem erros de compilação no seu código. 
 
@@ -789,22 +789,36 @@ Verifique se existem erros de compilação no seu código.
 
 ## Etapa 2: Template Method
 
-Nesta última etapa do exercício você deve refatorar os métodos `value` nas subclasses `TextStatement` e  `HtmlStatement`, aplicando o refactoring **Template Method** para eliminar o código duplicado. Esta etapa deve ser realizada em um **único commit**.
+Nesta etapa, nós temos dois métodos similares nas subclasses. Portanto, podemos aplicar o refactoring **Template Method**.
 
-O método `value` será o template na superclasse.
+```java
+class TextStatement...
+   public String value(Customer aCustomer) {
+      ...
+   }
+```
 
-**Dica**: Observe os métodos em cada subclasse:  
- 
-* *Quais trechos de código são similiares?* 
+```java      
+class HtmlStatement...
+   public String value(Customer aCustomer) {
+      ...
+   }
+```
 
-* *Quais trechos do código são diferentes e podem ser extraídos?*
+### Template Method - Parte 1
+Observe os dois métodos `value` e aplique todas as refatorações necessárias para remover os trechos de código que são diferentes.  O objetivo é tornar estes dois métodos iguais.
 
- 
+Verifique se existem erros de compilação no seu código. 
+
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 17"**)
+
+### Template Method - Parte 2
+
+Nesta última etapa do exercício, temos dois métodos `value` idênticos nas subclasses `TextStatement` e  `HtmlStatement`. Aplique uma última refatoração para remover este código duplicado. Ou seja, `value` será um template.
 
 Ao final, verifique se não existem erros de compilação. 
 
-Pronto, com isso terminamos: **COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 17"**)
-
+Pronto, com isso terminamos: **COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 18"**)
 
 # Comentário Final
 
