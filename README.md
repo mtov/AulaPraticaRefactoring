@@ -390,9 +390,9 @@ Verifique se existem erros de compilação no seu código.
 
 # Refactoring 7: Replace Conditional with Polymorphism
 
-Nós vamos realizar este refactoring em sete etapas.
+Nós vamos realizar este refactoring em sete passos.
 
-## Etapa 1: Extract and Move Method
+## Passo 1: Extract and Move Method
 
 * Primeiro, não faz sentido ter um switch que depende de um atributo (`_priceCode`) de uma outra classe (`Movie`). Logo, você deve **extrair e mover** o código de `getCharge()` na classe Rental para um método chamado `getCharge(int daysRented)` na classe Movie.
 
@@ -416,7 +416,7 @@ Verifique se existem erros de compilação no seu código.
 
 **COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 9"**)
 
-## Etapa 2: Extract and Move Method
+## Passo 2: Extract and Move Method
 
 * Vamos agora também **extrair** o código de `getFrequentRenterPoints()`  para `getFrequentRenterPoints(int daysRented)` e **movê-lo** para a classe `Movie`; ou seja, é melhor que métodos que usam informações sobre tipos de filme estejam todos na classe `Movie`.
 
@@ -441,7 +441,7 @@ Verifique se existem erros de compilação no seu código.
 
 **COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 10"**)
 
-## Etapa 3: Herança
+## Passo 3: Herança
 
 Por fim, herança, como no diagrama abaixo (**errata**: existe um erro no diagrama, que está no livro; onde consta `getCharge`, leia-se `getPriceCode`).
 
@@ -531,7 +531,7 @@ Verifique se existem erros de compilação no seu código.
 
 **COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 11"**)
 
-## Etapa 4: Extract and Move Method
+## Passo 4: Extract and Move Method
 
 * Mais um refactoring, agora você precisa  **extrair e mover** `getCharge(int)` da classe `Movie` para `getCharge(int)` na classe `Price`.
 
@@ -555,7 +555,7 @@ Verifique se existem erros de compilação no seu código.
 
 **COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 12"**)
 
-## Etapa 5: Herança
+## Passo 5: Herança
 
 * Caminhando para o final, vamos decompor `getCharge`, criando métodos específicos nas subclasses de `Price` (veja que na classe `Price`, propriamente dita, `getCharge` vai ficar como um método abstrato):
 
@@ -596,7 +596,7 @@ Verifique se existem erros de compilação no seu código.
 **COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 13"**)
 
 
-## Etapa 6: Extract and Move Method 
+## Passo 6: Extract and Move Method 
 
 * E agora vamos fazer algo bem parecido com o método `getFrequentRenterPoints(int)`. Para isso, como um primeiro passo, ainda intermediário, você precisa **extrair e mover** o código de `getFrequentRenterPoints(int)` da classe `Movie` para o método `getFrequentRenterPoints(int)` em `Price`.
 
@@ -621,7 +621,7 @@ Verifique se existem erros de compilação no seu código.
 **COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 14"**)
 
 
-## Etapa 7: Herança 
+## Passo 7: Herança 
 
 * E agora vamos decompor `getFrequentRenterPoints`; ele vai ficar com uma versão "genérica e concreta" em `Price` e, outra, para tratar um caso especial, em `NewReleasePrice`:
 
@@ -646,9 +646,6 @@ Verifique se existem erros de compilação no seu código.
 
 # Refactoring 8: Template Method
 
-Este refactoring será realizado em duas etapas.
-
-## Etapa 1: Herança
 A classe `Customer` possui dois métodos para imprimir informações sobre a dívida dos clientes.
 
 O método `statement()` imprime os dados em formato ASCII e o método `htmlStatement()` em formato HTML: 
@@ -664,11 +661,15 @@ class Customer...
    }
 ```
 
-Podemos observar que os métodos acima possuem trechos de código similares. O refactoring **Template Method** é recomendado para remover esta duplicação de código. 
+Podemos observar que os métodos acima possuem trechos de código similares. Este código seria duplicado novamente para adicionarmos um novo formato (por exemplo, teríamos um novo método para impressão em formato XML). 
+
+Podemos refatorar estes métodos para usar o padrão **Template Method**. Dessa forma, evitamos a duplicação de código para cada tipo de impressão. Este refactoring será realizado em dois passos.
+
+## Passo 1: Herança
 
 Inicialmente, precisamos organizar estes métodos em duas classes com uma superclasse em comum, como no diagrama abaixo:
 
-![heranca](classdiagram_template_method.png)
+<img src="classdiagram_template_method.png"  width="380"/>
 
 
 * Isto é, copie o código da classe `Statement` para um arquivo chamado `Statement.java`:
@@ -787,9 +788,10 @@ Verifique se existem erros de compilação no seu código.
 **COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 16"**)
 
 
-## Etapa 2: Template Method
+## Passo 2: Template Method
 
-Nesta etapa, nós temos dois métodos similares nas subclasses. Portanto, podemos aplicar o refactoring **Template Method**.
+Neste passo, nós temos dois métodos similares nas subclasses. Portanto, podemos usar o padrão **Template Method**. Siga as instruções abaixo para criar o método template, bem como os métodos abstratos que ele chama, na superclasse `Statement`.
+
 
 ```java
 class TextStatement...
@@ -806,7 +808,7 @@ class HtmlStatement...
 ```
 
 ### Template Method - Parte 1
-Observe os dois métodos `value` e aplique todas as refatorações necessárias para remover os trechos de código que são diferentes.  O objetivo é tornar estes dois métodos iguais.
+Observe os dois métodos `value` e aplique todas as refatorações necessárias para remover os trechos de código que são diferentes.  O objetivo é **tornar estes dois métodos iguais**.
 
 Verifique se existem erros de compilação no seu código. 
 
@@ -816,21 +818,9 @@ Verifique se existem erros de compilação no seu código.
 
 Nesta última etapa do exercício, temos dois métodos `value` idênticos nas subclasses `TextStatement` e  `HtmlStatement`. Aplique uma última refatoração para remover este código duplicado. Ou seja, `value` será um template.
 
+
 Ao final, verifique se não existem erros de compilação. 
 
 Pronto, com isso terminamos: **COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 18"**)
 
-# Comentário Final
-
-Para terminar mesmo, leia e reflita com calma sobre os comentários finais do Fowler (ele argumenta sobre as vantagens do Refactoring 7):
-
-> Putting in the state pattern was quite an effort. Was it worth it? The gain is that if I change any of price’s behavior, add new prices, or add extra price-dependent behavior, the change will be much easier to make. The rest of the application does not know about the use of the state pattern. For the tiny amount of behavior I currently have, it is not a big deal. In a more complex system with a dozen or so price-dependent methods, this would make a big difference. All these changes were small steps. It seems slow to write it this way, but not once did I have to open the debugger, so the process actually flowed quite quickly. It took me much longer to write this section of the book than it did to change the code.
-
-> I’ve now completed the second major refactoring. It is going to be much easier to change the classification structure of movies, and to alter the rules for charging and the frequent renter point system
-
-E também a seção que finaliza o capítulo (**Final Thoughts**):
-
-> This is a simple example, yet I hope it gives you the feeling of what refactoring is like. I’ve used several refactorings, including Extract Method (110), Move Method (142), and Replace Conditional with Polymorphism (255). All these lead to better-distributed responsibilities and code that is easier to maintain. It does look rather different from procedural style code, and that takes some getting used to. But once you are used to it, it is hard to go back to procedural programs.
-
-> The most important lesson from this example is the rhythm of refactoring: test, small change, test, small change, test, small change. It is that rhythm that allows refactoring to move quickly and safely.
 
