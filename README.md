@@ -17,7 +17,7 @@ Instruções:
 
 * Após cada etapa, dê um **COMMIT & PUSH**, adicionado uma descrição (mensagem) no commit conforme as instruções do roteiro. Esses commits serão usados na correção, para garantir que você realizou todos os refactorings solicitados. 
 
-* **Importante**: quando terminar, responda à seguinte issue, informando a URL do seu repositório e seu nome (caso contrário, seu trabalho não será corrigido).
+* **Importante**: quando terminar, responda à seguinte [issue](https://github.com/mtov/AulaPraticaRefactoring/issues/5), informando a URL do seu repositório e seu nome (caso contrário, seu trabalho não será corrigido).
 
 Observações: 
 
