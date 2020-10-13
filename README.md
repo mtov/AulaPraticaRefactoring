@@ -52,7 +52,7 @@ public class Movie {
 
   public String getTitle (){
       return _title;
-  };
+  }
 }
 ```
 
@@ -91,14 +91,15 @@ public class Customer {
 
    public Customer (String name){
       _name = name;
-   };
+   }
 
    public void addRental(Rental arg) {
       _rentals.addElement(arg);
    }
+   
    public String getName (){
       return _name;
-   };
+   }
   
   public String statement() {
      double totalAmount = 0;
