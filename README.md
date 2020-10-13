@@ -21,7 +21,7 @@ Instruções:
 
 Observações: 
 
-* Os resultados desta aula prática podem ser usados em trabalhos futuros do nosso grupo de pesquisa. Evidentemente, sempre de forma totalmente anônima (isto é, sem qualquer possibilidade de identificar os alunos).
+* Os código e refactorings realizados nesta aula prática podem ser usados em trabalhos científicos futuros do nosso grupo de pesquisa. Evidentemente, sempre de forma totalmente anônima (isto é, sem qualquer possibilidade de identificar os alunos).
 
 * Códigos que não compilam -- em qualquer um dos refactorings e passos -- serão avaliados com **nota zero**.
 
