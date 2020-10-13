@@ -2,8 +2,12 @@
 
 **Prof. Marco Tulio Valente**
 
-Objetivo: realizar alguns refactorings em um sistema hipotético, usado no livro do Fowler. Em caso de dúvidas, consulte o Capítulo 1 desse livro.
+Objetivo: realizar alguns refactorings em um sistema hipotético, usado no livro do Fowler.
 
+Para tirar proveito do exercício, é importante não apenas seguir o roteiro mecanicamente, mas também pensar nos benefícios que estão sendo alcançados com cada
+refactoring. Em caso de dúvida sobre os refactorings propostos, você pode consultar também o [Capítulo 9](https://engsoftmoderna.info/cap9.html) do nosso livro.
+
+O exemplo está em Java, mas a sintaxe é familiar mesmo para aqueles que nunca programaram na linguagem. Infelizmente, não é possível fazer em uma outra linguagem, pois a correção será automática. Você pode usar uma IDE Java (Eclipse, NetBeans, IntelliJ) ou então uma IDE online (como repl.it). Além disso, a próxima aula prática também será em Java.
 
 Instruções:
 
@@ -11,13 +15,15 @@ Instruções:
 
 * Vá seguindo o roteiro, refactoring a refactoring.
 
-* Após cada etapa, dê um **COMMIT & PUSH**, adicionado uma descrição no commit conforme as instruções apresentadas no roteiro. Esses commits serão usados na correção, para garantir que realizou todos os refactorings solicitados. 
+* Após cada etapa, dê um **COMMIT & PUSH**, adicionado uma descrição (mensagem) no commit conforme as instruções do roteiro. Esses commits serão usados na correção, para garantir que você realizou todos os refactorings solicitados. 
+
+* **Importante**: quando terminar, responda à seguinte issue, informando a URL do seu repositório e seu nome (caso contrário, seu trabalho não será corrigido).
 
 Observações: 
 
-* Os resultados desta aula prática podem ser usados em trabalhos futuros do nosso grupo de pesquisa.
+* Os resultados desta aula prática podem ser usados em trabalhos futuros do nosso grupo de pesquisa. Evidentemente, sempre de forma totalmente anônima (isto é, sem qualquer possibilidade de identificar os alunos).
 
-* Códigos que não compilam serão avaliados com **nota zero**.
+* Códigos que não compilam -- em qualquer um dos refactorings e passos -- serão avaliados com **nota zero**.
 
 
 # Versão Inicial
