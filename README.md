@@ -496,7 +496,7 @@ public class RegularPrice extends Price {
 ```
 
 Agora, em `Movie`, vamos:
- remover o campo `_priceCode` 
+* remover o campo `_priceCode`
 * criar um campo `_price` do tipo `Price`
 * alterar o construtor, para chamar `_price.setPriceCode`
 * criar um métodos `getPriceCode` e `setPriceCode`:
