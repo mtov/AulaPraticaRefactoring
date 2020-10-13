@@ -156,7 +156,9 @@ public class Customer {
 
 Verifique se existem erros de compilação no seu código. Códigos com erros de compilação serão avaliados com zero.
 
-**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 1"**) (observação: descrição é a string que descreve a modificação realizada no commit).
+**COMMIT & PUSH** (Adicione a seguinte descrição nesse commit &rarr; **"Commit 1"**) 
+
+Observação: descrição é a string que descreve a modificação realizada no commit.
 
 # Refactoring 1: Extract Method
 
