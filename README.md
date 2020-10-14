@@ -174,7 +174,7 @@ class Customer ...
       ...
    }
 
-   private String amountFor(Rental each) {
+   private double amountFor(Rental each) {
       //Adicionar o trecho de código extraído.
    }
 ```
@@ -221,7 +221,7 @@ class Customer ...
 
 ```java
 class Rental ...
-   public String getCharge() {
+   public double getCharge() {
       ...
    }
 ```
@@ -434,14 +434,14 @@ Verifique se existem erros de compilação no seu código.
 
 ```java 
 class Rental ...
-   public double getFrequentRenterPoints(){
+   public int getFrequentRenterPoints(){
       return _movie.getFrequentRenterPoints(_daysRented);
    }
 ```
 
 ```java 
 class Movie ...
-   public double getFrequentRenterPoints(int daysRented){
+   public int getFrequentRenterPoints(int daysRented){
        //Adicionar o trecho de código extraído.
    }
 ```
@@ -501,8 +501,8 @@ Agora, em `Movie`, vamos:
 * remover o campo `_priceCode`
 * criar um campo `_price` do tipo `Price`
 * alterar o construtor, para chamar `_price.setPriceCode`
-* criar um métodos `getPriceCode` e `setPriceCode`:
-* remover o campo `_priceCode` criar um campo `_price` do tipo `Price`), alterar o construtor e criar um métodos `getPriceCode` e `setPriceCode`:
+* atualizar os métodos `getPriceCode` e `setPriceCode`
+* remover o campo `_priceCode`, criar um campo `_price` do tipo `Price`, alterar o construtor, e atualizar os métodos `getPriceCode` e `setPriceCode`:
 
 ```java
 class Movie...
@@ -548,14 +548,14 @@ Verifique se existem erros de compilação no seu código.
 
 ```java
 class Movie ...
-   public int getCharge(int daysRented) {
+   public double getCharge(int daysRented) {
          return _price.getCharge(daysRented);
    }
 ```  
 
 ```java
 class Price ...
-   public int getCharge(int daysRented) {
+   public double getCharge(int daysRented) {
       //Adicionar o trecho de código extraído.
    }
 ```  
