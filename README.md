@@ -7,7 +7,7 @@ Objetivo: realizar alguns refactorings em um sistema hipotético, usado no livro
 Para tirar proveito do exercício, é importante não apenas seguir o roteiro mecanicamente, mas também pensar nos benefícios que estão sendo alcançados com cada
 refactoring. Em caso de dúvida sobre os refactorings propostos, você pode consultar também o [Capítulo 9](https://engsoftmoderna.info/cap9.html) do nosso livro.
 
-O exemplo está em Java, mas a sintaxe é familiar mesmo para aqueles que nunca programaram na linguagem. Infelizmente, não é possível fazer em uma outra linguagem, pois a correção será automática. Você pode usar uma IDE Java (Eclipse, NetBeans, IntelliJ) ou então uma IDE online (como repl.it). Além disso, a próxima aula prática também será em Java.
+O exemplo está em Java, mas a sintaxe é familiar mesmo para aqueles que nunca programaram na linguagem. Infelizmente, não é possível fazer em uma outra linguagem, pois a correção será automática. Você pode usar uma IDE Java (Eclipse, NetBeans, IntelliJ) ou então uma IDE online (como repl.it). 
 
 Instruções:
 
