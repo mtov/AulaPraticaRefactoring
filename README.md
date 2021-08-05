@@ -7,7 +7,7 @@ Objetivo: realizar alguns refactorings em um sistema hipotético, usado no livro
 Para tirar proveito do exercício:
 
 * **É importante não apenas seguir o roteiro mecanicamente, mas também analisar os benefícios que estão sendo alcançados com cada refactoring**. 
-* Ou seja, pense sempre nos motivos que tornarm o código refatorado melhor que o código anterior.
+* Ou seja, pense sempre nos motivos que tornam o código refatorado melhor do que o código anterior.
 
 Importante também: o roteiro baseia-se em uma parte (incompleta) de um sistema. Logo, você não vai executá-lo. O foco não é no funcionamento do sistema, mas na melhoria de sua estrutura (design) após cada passo do roteiro.
 
