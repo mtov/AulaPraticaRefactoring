@@ -4,7 +4,12 @@
 
 Objetivo: realizar alguns refactorings em um sistema hipotético, usado no livro do Fowler.
 
-Para tirar proveito do exercício, **é importante não apenas seguir o roteiro mecanicamente, mas também sempre analisar os benefícios que estão sendo alcançados com cada refactoring**. Ou seja, pense sempre no porquê o código refatorado é melhor que o código anterior.
+Para tirar proveito do exercício:
+
+* **É importante não apenas seguir o roteiro mecanicamente, mas também analisar os benefícios que estão sendo alcançados com cada refactoring**. 
+* Ou seja, pense sempre no porquê o código refatorado é melhor que o código anterior.
+
+Importante também: o roteiro baseia-se em uma parte (incompleta) de um sistema. Logo, você não vai precisar executar o sistema. O foco não é no funcionamento do sistema, mas na melhoria de sua estrutura (design) após cada passo do roteiro.
 
 Em caso de dúvida sobre os refactorings propostos, você pode consultar o [Capítulo 9](https://engsoftmoderna.info/cap9.html) do nosso livro.
 
