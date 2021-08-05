@@ -2,7 +2,7 @@
 
 **Prof. Marco Tulio Valente**
 
-Objetivo: realizar alguns refactorings em um sistema hipotético, usado no livro do Fowler, que é o livro clássico sobre o tema.
+Objetivo: realizar alguns refactorings em um sistema hipotético, também usado nos capítulos iniciais do livro do Fowler, que é o livro clássico sobre o tema.
 
 Para tirar proveito do exercício:
 
