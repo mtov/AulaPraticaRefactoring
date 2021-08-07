@@ -2,18 +2,18 @@
 
 **Prof. Marco Tulio Valente**
 
-Objetivo: realizar alguns refactorings em um sistema hipotético, também usado nos capítulos iniciais do livro do Fowler, que é o livro clássico sobre o tema.
+Objetivo: colocar em prática os conceitos de refactoring aprendidos na sala de aula. Para isso, o aluno vai realizar alguns refactorings em um sistema hipotético, também usado nos capítulos iniciais do livro do Fowler, que é o livro clássico sobre o tema.
 
 Para tirar proveito do exercício:
 
 * **É importante não apenas seguir o roteiro mecanicamente, mas também analisar os benefícios alcançados com cada refactoring**. 
 * Ou seja, pense sempre nos motivos que tornam o código refatorado melhor do que o código anterior.
 
-Importante também: o roteiro baseia-se em uma parte (incompleta) de um sistema. Logo, você não vai executá-lo. O foco não é no funcionamento do sistema, mas na melhoria de sua estrutura interna (design) após cada passo do roteiro.
+Importante também: o roteiro baseia-se em uma parte (incompleta) de um sistema. Logo, você não vai executá-lo. O nosso foco não está no funcionamento do sistema, mas na melhoria de sua estrutura interna (design) após cada passo do roteiro.
 
 Em caso de dúvida sobre os refactorings propostos, você pode consultar o [Capítulo 9](https://engsoftmoderna.info/cap9.html) do nosso livro.
 
-O exemplo está em Java, mas a sintaxe é familiar mesmo para aqueles que nunca programaram na linguagem. Infelizmente, não é possível fazer em uma outra linguagem, pois a correção será automática. Você pode usar uma IDE Java (Eclipse, NetBeans, IntelliJ) ou então uma IDE online (como repl.it). 
+O exemplo está em Java, mas a sintaxe é familiar mesmo para aqueles que nunca programaram na linguagem. Infelizmente, não é possível fazer em uma outra linguagem, pois a correção será automática. Você pode usar uma IDE Java (Eclipse, NetBeans, IntelliJ) ou então uma IDE online (como repl.it). A vantagem de usar o repl.it é que você não precisa realizar nenhuma instalação local na sua máquina.
 
 Instruções:
 
