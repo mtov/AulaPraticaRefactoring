@@ -26,7 +26,7 @@ Instruções:
 
 Observações: 
 
-* Os código e refactorings realizados nesta aula prática podem ser usados em nossas aulas e artigos futuros. Evidentemente, sempre de forma anônima (isto é, sem qualquer possibilidade de identificar os alunos ou mesmo a turma). Caso você não se sinta à vontade com isso, basta nos enviar um e-mail, solicitando que seu código não seja usado futuramente.
+* Os código e refactorings realizados nesta aula prática podem ser usados em nossas aulas e artigos futuros. Evidentemente, sempre de forma anônima (isto é, sem qualquer possibilidade de identificar o aluno ou mesmo a sua turma). Caso você não se sinta à vontade com isso, basta nos enviar um e-mail, solicitando que seu código não seja usado futuramente.
 
 * **Códigos que não compilam -- em qualquer um dos refactorings e passos -- serão avaliados com nota zero pelo nosso sistema de correção automática**
 
