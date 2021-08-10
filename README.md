@@ -297,7 +297,7 @@ class Customer ...
 
 ```java
 class Rental ...
-   public int getFrequentRenterPoints() { {
+   public int getFrequentRenterPoints() { 
       //Adicionar o trecho de código extraído.
    }
 ```
