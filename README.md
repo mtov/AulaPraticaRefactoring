@@ -360,7 +360,7 @@ class Customer...
    }
 ```
 
-Dois comentários breve, sobre alguns pontos que você já pode estar pensando sobre os últimos refactorings:
+Dois comentários breves, sobre alguns pontos que você já pode estar pensando sobre os últimos refactorings:
 
 * Eles aumentaram o tamanho do código: porém, também não foi tanto assim ...
 * Eles fizeram com o que o loop de `rentals` seja percorrido três vezes; na primeira versão do código, esse loop era executado uma única vez. Isso vai gerar problemas de performance? Talvez sim; mas, provavelmente na maioria dos casos, não vai fazer diferença, pois um cliente não tem tantos filmes alugados.
