@@ -13,7 +13,7 @@ Importante também: o roteiro baseia-se em uma parte (incompleta) de um sistema.
 
 Em caso de dúvida sobre os refactorings propostos, você pode consultar o [Capítulo 9](https://engsoftmoderna.info/cap9.html) do nosso livro.
 
-O exemplo está em Java, mas a sintaxe é familiar mesmo para aqueles que nunca programaram na linguagem. Infelizmente, não é possível fazer em uma outra linguagem, pois a correção será automática. Você pode usar uma IDE Java (Eclipse, NetBeans, IntelliJ) ou então uma IDE online (como [repl.it](https://replit.com/)). **A vantagem de usar o repl.it é que você não precisa realizar nenhuma instalação local na sua máquina**.
+O exemplo está em Java, mas a sintaxe é familiar mesmo para aqueles que nunca programaram na linguagem. Infelizmente, não é possível fazer em uma outra linguagem, pois a correção será automática. Você pode usar uma IDE Java (Eclipse, NetBeans, IntelliJ) ou então uma IDE online (como [repl.it](https://replit.com/)). **A vantagem de usar o repl.it é que você não precisa realizar nenhuma instalação local na sua máquina e também já dispobilizamos um [repl.it](https://replit.com/@engsoftmoderna/VideoStore) configurado com a versão inicial do exemplo usado no roteiro**.
 
 Instruções:
 
@@ -36,6 +36,10 @@ Observações:
 As classes que vamos usar fazem parte de um sistema de video-locadora, para aluguel de vídeos.
 
 Inicialmente, são três classes: `Movie` (filmes que podem ser alugados), `Rental` (dados de um aluguel) e `Customer` (clientes da locadora).
+
+Se estiver usando o repl.it, já disponibilizamos esse código inicial pronto: veja [aqui](https://replit.com/@engsoftmoderna/VideoStore).
+
+Se não estiver usando repl.it siga os passos a seguir na sua IDE ou editor favoritos.
 
 * Copie o código da classe `Movie` para um arquivo chamado `Movie.java`:
 ```java
